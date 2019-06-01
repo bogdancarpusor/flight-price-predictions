@@ -1,17 +1,19 @@
-from flask import Flask, request
+from flask import Blueprint, Flask, jsonify
 
+bp = Blueprint('api', __name__)
 app = Flask(__name__)
 
 
-@app.route('/')
-def index():
-    return 'Server Works great great!'
+@bp.route('/flight/<string:departure>/<int:id>', methods=['GET'])
+def get_user(departure, id):
+    return jsonify({'departure': departure, 'ide': id})
 
 
-@app.route('/greet')
-def say_hello():
-    return 'Hello from Server'
+@bp.route('/test', methods=['GET'])
+def get_users():
+    return jsonify({'result': 'okkk'})
 
 
-if __name__ == '__main__':
+def start_api_server():
+    app.register_blueprint(bp, api_prefix='/api')
     app.run(debug=True, host='0.0.0.0')

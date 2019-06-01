@@ -1,14 +1,8 @@
 version: '3'
 services:
   api:
-    build:
-      context: .
-      dockerfile: rest_api/Dockerfile
+    environment:
+      - APP_NAME=api
+    build: .
     ports: ['5000:5000']
-    volumes: ['.:/rest_api']
-  web_client:
-    build:
-      context: .
-      dockerfile: web_client/Dockerfile
-    ports: ['5000:5000']
-    volumes: ['.:/web_client']
+    volumes: ['.:/app']
