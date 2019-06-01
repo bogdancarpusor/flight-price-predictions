@@ -3,12 +3,12 @@ services:
   api:
     build:
       context: .
-      dockerfile: ./apps/api/Dockerfile
+      dockerfile: rest_api/Dockerfile
     ports: ['5000:5000']
-    volumes: ['.:/api']
+    volumes: ['.:/rest_api']
   web_client:
     build:
       context: .
-      dockerfile: ./apps/web_client/Dockerfile
+      dockerfile: web_client/Dockerfile
     ports: ['5000:5000']
     volumes: ['.:/web_client']
