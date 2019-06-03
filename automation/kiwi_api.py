@@ -1,5 +1,5 @@
 import requests
-from automation.errors import KiwiAPIError
+from .errors import KiwiAPIError
 
 
 def get_flight_prices_between_interval(departure_place, arrival_place, interval_start_date, interval_end_date):

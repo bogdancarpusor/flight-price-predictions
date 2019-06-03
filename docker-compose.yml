@@ -2,7 +2,40 @@ version: '3'
 services:
   api:
     environment:
-      - APP_NAME=api
+      APP_NAME: api
     build: .
+#      context: .
+#      dockerfile: ./api/Dockerfile
     ports: ['5000:5000']
+#    volumes: ['./api:/app']
     volumes: ['.:/app']
+  automation:
+    environment:
+      APP_NAME: automation
+    build: .
+    volumes: ['.:/app']
+  data:
+    image: postgres:latest
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    command: "true"
+  postgres:
+    restart: always
+    image: postgres:latest
+    environment:
+      - POSTGRES_USER:'flight-prices'
+      - POSTGRES_PASSWORD:'flight-prices-pass'
+      - POSTGRES_DB:'flight-prices'
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+  redis:
+    image: redis
+    volumes:
+      - 'redis:/data'
+    ports:
+      - '6379:6379'
+volumes:
+  db-data:
+  redis:
